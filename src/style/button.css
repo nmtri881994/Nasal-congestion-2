@@ -1,0 +1,96 @@
+.button-container-1 {
+    display: flex;
+    /* flex: */
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: */
+
+    /* position:  */
+    /* top: */
+    /* right: */
+    /* bottom: */
+    /* left: */
+
+    /* border: */
+    border-radius: 5px;
+    outline: none;
+
+    /* width: */
+    /* height: */
+
+    /* font-size: */
+    /* font-weight: */
+
+    /* margin: */
+    padding: .25em .5em;
+
+    color: white;
+    /* background: */
+    /* background-position:  */
+    /* background-size: */
+    /* background-repeat: */
+    background-color: #784cc0;
+
+    /* overflow: */
+
+    /* box-shadow: */
+
+    /* transition: */
+    cursor: pointer;
+}
+
+.button-container-1:hover {
+    background-color: #8e68ca;
+}
+
+.button-container-1:focus {
+    background-color: #663caa;
+}
+
+.button-item {
+    display: flex;
+    /* flex: */
+    /* flex-direction: */
+    justify-content: center;
+    align-items: center;
+
+    /* position:  */
+    /* top: */
+    /* right: */
+    /* bottom: */
+    /* left: */
+
+    /* border: */
+    /* border-radius: */
+
+    /* width: */
+    /* height: */
+
+    /* font-size: */
+    /* font-weight: */
+
+    /* margin: */
+    /* padding: */
+
+    /* color: */
+    /* background: */
+    /* background-position:  */
+    /* background-size: */
+    /* background-repeat: */
+    /* background-color: */
+
+    /* overflow: */
+
+    /* box-shadow: */
+
+    /* transition: */
+
+}
+
+.button-item:not(:first-of-type) {
+    margin-left: .5em;
+}
+
+.button-icon {
+    font-size: 1.5em;
+}
