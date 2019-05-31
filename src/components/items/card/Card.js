@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,7 +12,8 @@ import Thumbnail from './Thumbnail';
 import ActionButton from '../form/ActionButton';
 
 //actions
-import * as action from '../../../actions/searchAction';
+import { getMetadataByNasaId } from '../../../actions/searchAction';
+import { viewMedia } from '../../../actions/cardAction';
 
 const Card = (props) => {
 
@@ -20,7 +23,7 @@ const Card = (props) => {
         let isSubcribed = true;
 
         async function getOwner() {
-            const metadatRes = await action.getMetadataByNasaId(props.item.data[0].media_type, props.item.data[0].nasa_id);
+            const metadatRes = await getMetadataByNasaId(props.item.data[0].media_type, props.item.data[0].nasa_id);
             if (metadatRes && metadatRes.status === 200) {
                 const metadata = await metadatRes.json();
                 setOwner(metadata["AVAIL:Owner"]);
@@ -31,9 +34,15 @@ const Card = (props) => {
         return () => isSubcribed = false;
     }, [props.item.data[0].nasa_id])
 
-    return (<div className="card-container-1">
-        {!props.item.links ? console.log(props.item) : null}
-        <Thumbnail image={props.item.links ? props.item.links[0].href : null} type={props.item.data[0].media_type} />
+    return (<div className="card-container-1" onClick={() => {
+        props.viewMedia({
+            name: props.item.data[0].title,
+            type: props.item.data[0].media_type,
+            contentLink: props.item.links[0].href
+        });
+    }}>
+        <Thumbnail
+            image={props.item.links ? props.item.links[0].href : null} type={props.item.data[0].media_type} />
         <div className="card-detail-container-1">
             <div className="card-detail-item-container-1 card-location-time">
                 <div className="card-location">
@@ -67,4 +76,10 @@ const Card = (props) => {
     </div>);
 };
 
-export default Card;
+const mapStateToProps = state => ({
+});
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators({ viewMedia }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

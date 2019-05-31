@@ -5,7 +5,7 @@ const APIRoot2 = "https://images-assets.nasa.gov";
 
 export const searchByKey = (keyword) => {
     try {
-        return fetch(`${APIRoot}/search?q=${keyword}&page=1`, {
+        return fetch(`${APIRoot}/search?q=${keyword}&page=1&media_type=image,video`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
