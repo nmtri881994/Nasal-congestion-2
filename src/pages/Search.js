@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import _ from 'lodash';
 
 //custom hooks
 import { useInterval } from "../customer-hooks/useInterval"
@@ -11,6 +12,7 @@ require("../style/search-page.css");
 
 //components
 import MainLayout from '../components/layouts/Main';
+import Cards from '../components/items/card/Cards';
 
 //action
 import * as action from '../actions/searchAction';
@@ -32,31 +34,48 @@ const Search = (props) => {
         setTypingTimer(setInterval(() => setTriggerSearch(true), timeTypingInterval));
     };
 
+    const [searchMess, setSearchMess] = useState("");
+
+    const [searchResults, setSearchResults] = useState([]);
+
+    const [nextLink, setNextLink] = useState([]);
+
     useEffect(() => {
         let isSubscribed = true;
 
         async function search() {
-            console.log(1111);
-            // const searchRes = await action.searchByKeyGetAllResult(searchKey);
-            // if (searchRes) {
-            //     const searchData = await searchRes.json();
-            //     if (searchData) {
-            //         console.log(111, searchData);
-            //     } else {
-            //         console.error("data format wrong");
-            //     }
-            // } else {
-            //     console.error("System error");
-            // }
+            const searchRes = await action.searchByKey(searchKey);
+            if (searchRes) {
+                const searchData = await searchRes.json();
+                if (searchData) {
+                    if (isSubscribed) {
+                        const newSearchResults = [];
+                        let items = searchData.collection.items.filter(item => ["video", "image"].indexOf(item.data[0].media_type) !== -1);
+                        while (items.length) {
+                            newSearchResults.push(items.splice(0, 3));
+                        }
+
+                        setSearchResults(newSearchResults);
+                        setNextLink(searchData.collection.links);
+                    }
+                } else {
+                    if (isSubscribed) {
+                        setSearchMess("Data format wrong");
+                    }
+                }
+            } else {
+                if (isSubscribed) {
+                    setSearchMess("System error");
+                }
+            }
         }
 
         if (triggerSearch && searchKey.trim() !== "") {
-            console.log(1111);
             search();
         }
 
         return () => isSubscribed = false;
-    })
+    }, [triggerSearch, searchKey])
 
     return (
         <MainLayout>
@@ -73,10 +92,10 @@ const Search = (props) => {
                 </div>
                 <input value={searchKey} onChange={e => onSearchChange(e)} className="search-input" placeholder="Type something to search..." />
                 <div className="search-number-of-results">
-
+                    {searchMess}
                 </div>
                 <div className="search-result">
-
+                    <Cards cards={searchResults} mode={"search"} />
                 </div>
             </div>
         </MainLayout >

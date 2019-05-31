@@ -9,7 +9,7 @@ const Thumbnail = (props) => {
     const thumbnailContainer3Style = {
         display: "block",
         paddingBottom: "60%",
-        background: `url(${props.image ? props.image : ""})`,
+        background: `url(${props.image ? encodeURI(props.image) : ""})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat"

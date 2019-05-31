@@ -1,5 +1,9 @@
 import * as api from '../apis/searchApi';
 
-export function searchByKeyGetAllResult(keyword) {
-    return api.searchByKeyGetAllResult(keyword);
-}
+export function searchByKey(keyword) {
+    return api.searchByKey(keyword);
+};
+
+export function getMetadataByNasaId(mediaType, NasaId) {
+    return api.getMetadataByNasaId(mediaType, NasaId);
+};

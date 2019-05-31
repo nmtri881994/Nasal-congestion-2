@@ -24,3 +24,8 @@
     font: inherit;
     margin-top: 2rem;
 }
+
+.search-number-of-results {
+    display: flex;
+    margin-top: 1em;
+}
