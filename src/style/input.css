@@ -4,24 +4,17 @@
     flex-direction: column;
     justify-content: center;
     /* align-items: */
-
     position: relative;
     /* top:
     right:
     bottom:
     left: */
-
-
-    
     /* width: */
     /* height: 3em; */
-
     font-size: 18px;
     /* font-weight: */
-
     /* margin: */
     /* padding: 10 px; */
-
     /* color:
     background:
     background-position: 
@@ -48,62 +41,47 @@
     right:
     bottom:
     left: */
-
-
     border-radius: 5px;
     border: 1px solid #ebebed;
-
     /* width: */
     /* height: 3em; */
-
     font: inherit;
     font-size: 1em;
-    
     padding: 1.5em .5em .25em .5em;
-
     background: transparent;
-
     outline: none;
-
     z-index: 1;
-
     cursor: text;
 }
 
 .input:hover, .input:focus {
     border-color: #d3d2d9;
-    box-shadow: 0 4px 10px 0 rgba(120,76,192, 0.2);
+    box-shadow: 0 4px 10px 0 rgba(120, 76, 192, 0.2);
 }
 
 .input-label {
     display: flex;
     align-items: center;
-
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: .5em;
-
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
     /* border:
     border-radius:
 
     width:
     height: */
-
     font-size: 1em;
     /* font-weight: */
-
     /* /* margin: */
     padding: .5em 0;
-
     color: #aeacb9;
     /*background:
     background-position: 
@@ -114,18 +92,16 @@
     overflow:
 
     box-shadow: */
-
     transition: all .1s ease;
 }
 
-.input:focus ~.input-label, .input:valid ~label {
+.input:focus~.input-label, .input:valid~label {
     font-size: .8em;
     left: .6em;
     align-items: flex-start;
 }
 
-
-.input:required ~ :after{
+.input:required~ :after {
     content: "*";
     color: red;
     margin-left: 5px;
@@ -143,18 +119,12 @@
     right:
     bottom:
     left: */
-
-
     border-radius: 5px;
     border: 1px solid #ebebed;
-
     font: inherit;
     font-size: 1em;
-    
     padding: 1.5em .5em .25em .5em;
-
     background: transparent;
-
     outline: none;
     z-index: 1;
     cursor: text;
@@ -162,17 +132,16 @@
 
 .input-textarea:hover, .input-textarea:focus {
     border-color: #d3d2d9;
-    box-shadow: 0 4px 10px 0 rgba(120,76,192, 0.2);
+    box-shadow: 0 4px 10px 0 rgba(120, 76, 192, 0.2);
 }
 
-.input-textarea:focus ~.input-label, .input-textarea:valid ~label {
+.input-textarea:focus~.input-label, .input-textarea:valid~label {
     font-size: .8em;
     left: .6em;
     align-items: flex-start;
 }
 
-
-.input-textarea:required ~ :after{
+.input-textarea:required~ :after {
     content: "*";
     color: red;
     margin-left: 5px;

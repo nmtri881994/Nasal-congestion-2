@@ -2,15 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
     border-radius: 5px;
     border: 1px solid #ebebed;
     outline: none;
-
     color: #aeacb9;
-
     padding: .5em;
-
     cursor: pointer;
 }
 
@@ -18,7 +14,7 @@
     margin-left: .5em;
 }
 
-.action-button-container-1:hover, .action-button-container-1:focus {
+/* .action-button-container-1:hover{
     border-color: #d3d2d9;
     color: black;
-}
+} */

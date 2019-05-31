@@ -9,6 +9,30 @@ import Button from '../src/components/items/form/button';
 import ActionButton from '../src/components/items/form/ActionButton';
 
 import Thumbnail from '../src/components/items/card/Thumbnail';
+import Card from '../src/components/items/card/Card';
+
+const items = [
+    {
+        id: 1,
+        type: "video",
+        localtion: "location",
+        time: "time",
+        title: "Title title title",
+        description: "One1111111111111111111111111111111111111111111111111111111111111111111111 of the biggest complaints I hear about TDD and unit tests is that people struggle with all of the mocking required to isolate units. Some people struggle to understand how their unit tests are even meaningful. In fact, I’ve seen developers get so lost in mocks, fakes, and stubs that they wrote entire files of unit tests where no actual implementation code was exercised at all. Oops.",
+        previewImgUrl: "https://images-assets.nasa.gov/image/PIA11189/PIA11189~thumb.jpg",
+        fileUrl: ""
+    },
+    {
+        id: 2,
+        type: "video",
+        localtion: "location",
+        time: "time",
+        title: "Title title title",
+        description: "One of the biggest complaints I hear about TDD and unit te",
+        previewImgUrl: "https://images-assets.nasa.gov/image/PIA11189/PIA11189~thumb.jpg",
+        fileUrl: ""
+    }
+]
 
 const App = () => (
     <div>
@@ -31,7 +55,10 @@ const App = () => (
         </div>
 
         <div style={{ display: "flex", flexDirection: "row" }}>
-            <Thumbnail image={"https://images-assets.nasa.gov/image/PIA11189/PIA11189~thumb.jpg"} type={"video"} />
+            {items.map(item => <Card key={item.id} item={item} mode="view" />)}
+        </div>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+            {items.map(item => <Card key={item.id} item={item} mode="search" />)}
         </div>
     </div>
 );
