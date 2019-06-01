@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 
 //style
@@ -28,7 +28,9 @@ const Card = (props) => {
             const metadatRes = await getMetadataByNasaId(props.item.type, props.item.nasaId);
             if (metadatRes && metadatRes.status === 200) {
                 const metadata = await metadatRes.json();
-                setOwner(metadata["AVAIL:Owner"]);
+                if (isSubcribed) {
+                    setOwner(metadata["AVAIL:Owner"]);
+                }
             }
         }
         getOwner();
@@ -80,15 +82,16 @@ const Card = (props) => {
                     <ActionButton type="favorite" favorited={props.item.favorited} onClick={props.toggleFavorite} onClickAgrs={props.item.nasaId} />
                     <ActionButton type="remove" onClick={props.removeItem} onClickAgrs={props.item.nasaId} />
                     <ActionButton type="edit" onClick={onAddOrEdit} />
-                </div> : props.mode === "search" ? <div className="card-search-action-container-1" onClick={() => onAddOrEdit()}>
-                    <span>Add to Nasa collection</span>
-                    <div className="add-to-collection-button-icon">
-                        <FontAwesomeIcon icon={faPlus} />
-                    </div>
-                </div> : null}
+                </div> : props.mode === "search" ? <div className={`card-search-action-container-1 ${props.item.added?"disabled":""}`} onClick={() => onAddOrEdit()}>
+
+                    <span>{props.item.added ? "Added" : "Add to Nasa collection"}</span>
+                <div className="add-to-collection-button-icon">
+                    <FontAwesomeIcon icon={props.item.added ? faCheck : faPlus} />
+                </div>
+            </div> : null}
             </div>
-        </div>
-    </div>);
+    </div>
+    </div >);
 };
 
 const mapStateToProps = state => ({

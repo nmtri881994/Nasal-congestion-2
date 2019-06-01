@@ -43,6 +43,7 @@ const Search = (props) => {
 
     useEffect(() => {
         let isSubscribed = true;
+        const collection = props.collection;
 
         async function search() {
             if (isSubscribed) {
@@ -68,6 +69,8 @@ const Search = (props) => {
 
                             return newItem;
                         })
+
+                        items = filterOutAdded(collection, items);
 
                         while (items.length) {
                             newSearchResults.push(items.splice(0, 3));
@@ -96,9 +99,40 @@ const Search = (props) => {
         return () => isSubscribed = false;
     }, [triggerSearch, searchKey]);
 
+    function filterOutAdded(collection, items) {
+        return items.map(item => {
+            if (collection.findIndex(x => x.nasaId === item.nasaId) !== -1) {
+                item.added = true;
+            };
+
+            return item;
+        })
+    }
+
     useEffect(() => {
-        // console.log("state.collection", props.collection);
+        const newResults = filterOutAdded2(props.collection, searchResults);
+        if (!_.isEqual(newResults, searchResults)) {
+            setSearchResults(newResults);
+        }
+
     })
+
+    function filterOutAdded2(collection, searchResults) {
+        const results = searchResults.slice(0);
+        return results.map(result => {
+            result = result.map(item => {
+                if (collection.findIndex(x => x.nasaId === item.nasaId) !== -1) {
+                    let newItem = Object.assign({}, item);
+                    newItem.added = true;
+                    return newItem;
+                };
+
+                return item;
+            });
+
+            return result;
+        })
+    }
 
     return (
         <MainLayout>
