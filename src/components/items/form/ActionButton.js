@@ -18,7 +18,13 @@ const ActionButton = (props) => {
     }
 
     return (
-        <div style={iconStyle} onMouseEnter={onToggleHover} onMouseLeave={onToggleHover} className="action-button-container-1" tabIndex={props.tabIndex}>
+        <div onClick={() => {
+            if (props.onClickAgrs) {
+                props.onClick(props.onClickAgrs);
+            } else {
+                props.onClick();
+            }
+        }} style={iconStyle} onMouseEnter={onToggleHover} onMouseLeave={onToggleHover} className="action-button-container-1" tabIndex={props.tabIndex}>
             <FontAwesomeIcon icon={props.type === "remove" ?
                 faTrashAlt : props.type === "favorite" ?
                     faHeart : props.type === "edit" ?

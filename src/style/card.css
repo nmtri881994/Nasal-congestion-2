@@ -109,3 +109,7 @@
     font-size: 1.3em;
     color: black;
 }
+
+.card-thumbnail-container-1 {
+    display: flex;
+}

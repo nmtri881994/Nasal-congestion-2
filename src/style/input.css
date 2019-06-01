@@ -54,6 +54,10 @@
     cursor: text;
 }
 
+.form-invalid {
+    border-color: red;
+}
+
 .input:hover, .input:focus {
     border-color: #d3d2d9;
     box-shadow: 0 4px 10px 0 rgba(120, 76, 192, 0.2);
@@ -101,7 +105,7 @@
     align-items: flex-start;
 }
 
-.input:required~ :after {
+.required::after {
     content: "*";
     color: red;
     margin-left: 5px;
@@ -109,7 +113,7 @@
 
 .input-textarea {
     display: flex;
-    flex: 1;
+    /* flex: 1; */
     /* flex-direction:
     justify-content:
     align-items:
@@ -139,10 +143,4 @@
     font-size: .8em;
     left: .6em;
     align-items: flex-start;
-}
-
-.input-textarea:required~ :after {
-    content: "*";
-    color: red;
-    margin-left: 5px;
 }

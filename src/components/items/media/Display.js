@@ -16,7 +16,6 @@ import { closeMediaDisplay } from '../../../actions/cardAction';
 const Display = (props) => {
 
     useEffect(() => {
-        console.log(props);
     })
 
     return (

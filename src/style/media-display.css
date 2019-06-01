@@ -24,7 +24,10 @@
 .media-header-container-1 {
     display: flex;
     position: absolute;
-    top: -1em;
+    top: -.25em;
+    left: 0;
+    right: 0;
+    transform: translateY(-100%);
     font-size: 2em;
     color: #cccccc;
 }
@@ -41,8 +44,8 @@
 
 .media-display-close {
     display: flex;
-    right: 0;
-    top: -1.25em;
+
+    margin-left: .25rem;
     cursor: pointer;
 }
 

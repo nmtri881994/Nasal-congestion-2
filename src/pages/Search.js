@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -44,6 +45,9 @@ const Search = (props) => {
         let isSubscribed = true;
 
         async function search() {
+            if (isSubscribed) {
+                setSearchMess("Loading...");
+            }
             const searchRes = await action.searchByKey(searchKey);
             if (searchRes) {
                 const searchData = await searchRes.json();
@@ -51,12 +55,27 @@ const Search = (props) => {
                     if (isSubscribed) {
                         const newSearchResults = [];
                         let items = searchData.collection.items.filter(item => ["video", "image"].indexOf(item.data[0].media_type) !== -1);
+                        const numberOfResult = items.length;
+                        items = items.map(item => {
+                            let newItem = {};
+                            newItem.nasaId = item.data[0].nasa_id;
+                            newItem.title = item.data[0].title;
+                            newItem.description = item.data[0].description;
+                            newItem.type = item.data[0].media_type;
+                            newItem.previewImageUrl = item.links[0].href;
+                            newItem.fileURl = "";
+                            newItem.dateCreated = item.data[0].date_created;
+
+                            return newItem;
+                        })
+
                         while (items.length) {
                             newSearchResults.push(items.splice(0, 3));
                         }
 
                         setSearchResults(newSearchResults);
                         setNextLink(searchData.collection.links);
+                        setSearchMess(`${numberOfResult} result(s) for "${searchKey}"`);
                     }
                 } else {
                     if (isSubscribed) {
@@ -75,13 +94,17 @@ const Search = (props) => {
         }
 
         return () => isSubscribed = false;
-    }, [triggerSearch, searchKey])
+    }, [triggerSearch, searchKey]);
+
+    useEffect(() => {
+        // console.log("state.collection", props.collection);
+    })
 
     return (
         <MainLayout>
             <div className="search-page-container-1">
                 <div className="search-back-to-collection">
-                    <Link style={{ display: "flex", color: "#3399f0" }} to="/nasa-search"><FontAwesomeIcon style={{ display: "flex", marginRight: "10px", fontSize: "1.2em" }} icon={faChevronLeft} />
+                    <Link style={{ display: "flex", color: "#3399f0" }} to="/"><FontAwesomeIcon style={{ display: "flex", marginRight: "10px", fontSize: "1.2em" }} icon={faChevronLeft} />
                         <span style={{ display: "flex", alignItems: "center" }}>
                             Back to Collection
                         </span>
@@ -95,11 +118,16 @@ const Search = (props) => {
                     {searchMess}
                 </div>
                 <div className="search-result">
-                    <Cards cards={searchResults} mode={"search"} />
+                    {searchResults.length !== 0 ?
+                        <Cards cards={searchResults} mode={"search"} /> : null}
                 </div>
             </div>
         </MainLayout >
     )
 };
 
-export default Search;
+const mapStateToProps = state => ({
+    collection: state.collection
+});
+
+export default connect(mapStateToProps)(Search);

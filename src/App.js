@@ -3,9 +3,9 @@ import React from 'react';
 const title = 'My Minimal React Webpack Babel Setup 123';
 
 //components
-import Input from '../src/components/items/form/input';
+import Input from '../src/components/items/form/FormInput';
 import TextArea from '../src/components/items/form/TextArea';
-import Button from '../src/components/items/form/button';
+import Button from './components/items/form/FormButton';
 import ActionButton from '../src/components/items/form/ActionButton';
 
 import Thumbnail from '../src/components/items/card/Thumbnail';

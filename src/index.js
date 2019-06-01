@@ -14,6 +14,7 @@ import store from './store';
 //components
 import App from "./App";
 import Search from './pages/Search';
+import Index from './pages/Index';
 
 const history = syncHistoryWithStore(createBrowserHistory(), store);
 
@@ -21,7 +22,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             {/* <Route path="/"> */}
-            <Route exact path="/" component={Search} />
+            <Route exact path="/" component={Index} />
             <Route path="/nasa-search" component={Search} />
             {/* </Route> */}
         </Router>
